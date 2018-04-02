@@ -65,7 +65,6 @@ export default {
 
   beforeMount() {
     if (!this.post) return;
-    console.log(this.post);
     this.$getResource('post', this.post)
       .then(this.showComments)
   }
