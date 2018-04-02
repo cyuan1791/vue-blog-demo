@@ -30,10 +30,44 @@ import { kebabify, prettyDate } from '../helpers'
 export default {
   name: 'blog-post',
   resource: 'BlogPost',
-  components: { VueDisqus },
-  props: { post: String },
+  components: {VueDisqus},
+  props: {post: String},
 
   data() {
+    return {
+      title: '',
+      author: '',
+      content: '',
+      published: '',
+      description: '',
+      commentsReady: false
+    }
+  },
+  watch: {
+    post(to, from) {
+      if (to === from || !this.post) return;
+
+      this.commentsReady = false
+      this.$getResource('post', to)
+        .then(this.showComments)
+    }
+  },
+
+  methods: {
+    kebabify,
+    prettyDate,
+    showComments() {
+      setTimeout(() => {
+        this.commentsReady = true
+      }, 1000)
+    }
+  },
+
+  beforeMount() {
+    if (!this.post) return;
+    // console.log(this.post);
+    // this.$getResource('post', this.post)
+    //   .then(this.showComments)
     let postData = {
       'consequat-ut-nulla': [{
         'id': 'consequat-ut-nulla',
@@ -203,59 +237,14 @@ export default {
     }
     if (this.post) {
       // console.log(postData[this.post][0].meta)
-      let currentPost = postData[this.post][0]
-      currentPost['author'] = postData[this.post][0].meta.author
-      currentPost['published'] = postData[this.post][0].meta.published
-      currentPost['description'] = postData[this.post][0].meta.description
-      currentPost['commentsReady'] = false
+      this.$data.author = postData[this.post][0].meta.author
+      this.$data.published = postData[this.post][0].meta.published
+      this.$data.description = postData[this.post][0].meta.description
+      this.$data.commentsReady = false
+      this.$data.content = postData[this.post][0].content
 
-      return currentPost
-    } else {
-      return {
-        title: '',
-        author: '',
-        content: '',
-        published: '',
-        description: '',
-        commentsReady: false
-      }
-    }
-  },
-    // {
-      // title: '',
-      // author: '',
-      // content: '',
-      // published: '',
-      // description: '',
-      // commentsReady: false
-   //  }
-  // }
-
-  watch: {
-    post(to, from) {
-      if (to === from || !this.post) return;
-
-      this.commentsReady = false
-      this.$getResource('post', to)
-        .then(this.showComments)
-    }
-  },
-
-  methods: {
-    kebabify,
-    prettyDate,
-    showComments() {
-      setTimeout(() => {
-        this.commentsReady = true
-      }, 1000)
+      console.log(this.$data)
     }
   }
-
-  // beforeMount() {
-  //   if (!this.post) return;
-  //   console.log(this.post);
-  //   this.$getResource('post', this.post)
-  //     .then(this.showComments)
-  // }
 }
 </script>
