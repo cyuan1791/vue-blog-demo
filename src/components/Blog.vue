@@ -3,7 +3,7 @@
     <blog-nav :content="content" :filters="filters" :navs="navs"/>
     <blog-feed :filters="filters"/>
     <blog-post :post="post"/>
-    <blog-footer/>
+    <!--<blog-footer/>-->
   </main>
 </template>
 
@@ -25,10 +25,10 @@ export default {
   data() {
     return {
       navs: 0,
-      title: '',
+      title: 'my title',
       labels: {
-        post: '',
-        author: ''
+        post: 'post label',
+        author: 'hello'
       }
     }
   },
@@ -49,12 +49,14 @@ export default {
 
   watch: {
     '$route.name' (to, from) {
+      // console.log(to + from)
+      // console.log(this.$route.params)
       if (to !== from) this.navs++
     }
-  },
-
-  beforeMount() {
-    this.$getResource('blog')
   }
+
+  // beforeMount() {
+  //   this.$getResource('blog')
+  // }
 }
 </script>
