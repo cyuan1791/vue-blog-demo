@@ -27,8 +27,8 @@ export default {
       navs: 0,
       title: 'my title',
       labels: {
-        post: 'post label',
-        author: 'hello'
+        post: 'Back',
+        author: 'Back'
       }
     }
   },

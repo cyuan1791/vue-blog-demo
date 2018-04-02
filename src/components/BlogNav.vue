@@ -1,8 +1,6 @@
 <template>
   <nav class="nav">
-    <h1 class="nav__title">
-      <router-link to="/">Home</router-link>
-    </h1>
+      <a href="/">Home</a>
 
     <transition-group tag="menu" name="nav__item" class="nav__menu">
       <li v-for="label in labels" class="nav__item" :key="label" @click="navBack">
