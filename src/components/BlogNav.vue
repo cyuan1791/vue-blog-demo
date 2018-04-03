@@ -1,6 +1,7 @@
 <template>
   <nav class="nav">
       <a href="/">Home</a>
+    <a v-for="nav in extraNav" :href="nav.href">{{ nav.desc }}</a>
 
     <transition-group tag="menu" name="nav__item" class="nav__menu">
       <li v-for="label in labels" class="nav__item" :key="label" @click="navBack">
@@ -27,6 +28,9 @@ export default {
     labels() {
       return Object.keys(this.filters)
         .map(filter => this.content.labels[filter])
+    },
+    extraNav() {
+      return window.vueextranav;
     }
   },
 
