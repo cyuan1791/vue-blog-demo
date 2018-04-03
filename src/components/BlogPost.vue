@@ -1,6 +1,6 @@
 <template>
   <transition name="post">
-    <article v-if="post" class="post">
+    <div v-if="post" class="col-sm-8">
       <header class="post__header">
         <h3 class="post__title">{{ title }}</h3>
 
@@ -19,7 +19,7 @@
         <!--<vue-disqus v-if="commentsReady" shortname="vue-blog-demo"-->
           <!--:key="post" :identifier="post" :url="`https://vue-blog-demo.netlify.com/read/${post}`"/>-->
       <!--</footer>-->
-    </article>
+    </div>
   </transition>
 </template>
 

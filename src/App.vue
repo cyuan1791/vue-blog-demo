@@ -6,6 +6,6 @@
 export default { name: 'app' }
 </script>
 
-<style lang="scss">
-@import './sass/app';
-</style>
+<!--<style lang="scss">-->
+<!--@import './sass/app';-->
+<!--</style>-->

@@ -1,31 +1,35 @@
 <template>
-  <transition-group tag="ul" :name="transition"  class="blog__feed">
-    <li v-for="post in feed" class="preview" :key="post.id" >
-      <figure class="preview__figure" :class="figureClass" :style="getBgImg(post.image)">
-        <transition name="v--fade">
-          <figcaption v-if="!reading || $device.phone" class="preview__details">
-            <router-link class="preview__title"
-              :to="`/read/${post.id}`"
-              @click.native="scrollTo(0, 220, scrollDelay)">
-              {{ post.title }}
-            </router-link>
+  <div :class="feed.length == 1 ? 'col-sm-4' : 'col-sm-12'">
+      <transition-group tag="div" :name="transition" class="row">
+        <div v-for="post in feed" :class="feed.length != 1 ? 'col-sm-4' : 'col-sm-12'" :key="post.id" style="margin-top: 20px;padding: 10px;">
+          <figure class="preview__figure">
+            <transition name="v--fade">
+              <div>
+                <router-link class="preview__title"
+                             :to="`/read/${post.id}`"
+                             @click.native="scrollTo(0, 220, scrollDelay)">
+                  <img :src="post.image" class="img-responsive" />
+                  {{ post.title }}
+                </router-link>
 
-            <div class="preview__meta">
-              <time class="preview__published">
-                {{ prettyDate(post.published) }}
-              </time>
+                <div class="preview__meta">
+                  <time class="preview__published">
+                    {{ prettyDate(post.published) }}
+                  </time>
 
-              <router-link class="preview__author"
-                :to="`/by/${kebabify(post.author)}`"
-                @click.native="scrollTo(0, 220, scrollDelay)">
-                {{ post.author }}
-              </router-link>
-            </div>
-          </figcaption>
-        </transition>
-      </figure>
-    </li>
-  </transition-group>
+                  <router-link class="preview__author"
+                               :to="`/by/${kebabify(post.author)}`"
+                               @click.native="scrollTo(0, 220, scrollDelay)">
+                    {{ post.author }}
+                  </router-link>
+                </div>
+              </div>
+            </transition>
+          </figure>
+        </div>
+      </transition-group>
+
+  </div>
 </template>
 
 <script>
@@ -51,7 +55,7 @@ export default {
 
   computed: {
     reading() { return this.filters.post },
-    scrollDelay() { return (this.$device.phone) ? 0 : 560 },
+    scrollDelay() { return 560 },
     figureClass() {
       return { 'preview__figure--mobile': this.$device.phone && this.reading }
     },

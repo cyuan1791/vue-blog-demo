@@ -1,14 +1,17 @@
 <template>
-  <nav class="nav">
-      <a href="/">Home</a>
-
-    <transition-group tag="menu" name="nav__item" class="nav__menu">
-      <li v-for="label in labels" class="nav__item" :key="label" @click="navBack">
-        <i class="nav__item--icon"></i>
-        <span class="nav__item--label">{{ label }}</span>
-      </li>
+  <div class="col-xs-12">
+  <ul class="nav nav-tabs">
+    <li v-for="nav in extraNav"> <a :href="nav.href">{{ nav.desc }}</a></li>
+  </ul>
+    <div class="btn-group pull-right">
+    <transition-group tag="ul" name="nav__item" class="nav nav-tabs">
+      <button v-for="label in labels" class="btn btn-default" :key="label" @click="navBack">
+       <a @click="navBack"> <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+         {{ label }}</a>
+      </button>
     </transition-group>
-  </nav>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -27,6 +30,9 @@ export default {
     labels() {
       return Object.keys(this.filters)
         .map(filter => this.content.labels[filter])
+    },
+    extraNav() {
+      return window.vueextranav;
     }
   },
 
