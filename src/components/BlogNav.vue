@@ -1,6 +1,5 @@
 <template>
   <nav class="nav">
-      <a href="/">Home</a>
     <a v-for="nav in extraNav" :href="nav.href">{{ nav.desc }}</a>
 
     <transition-group tag="menu" name="nav__item" class="nav__menu">
