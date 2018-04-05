@@ -10,7 +10,7 @@
       <transition-group tag="div" name="nav" class="pull-right">
         <span v-for="label in labels" class="nav__item" :key="label" @click="navBack">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          <span class="nav__item--label">{{ label }}</span>
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
         </span>
       </transition-group>
     </div>
