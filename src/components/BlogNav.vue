@@ -1,46 +1,51 @@
 <template>
-  <div class="col-xs-12">
-  <ul class="nav nav-tabs">
-    <li v-for="nav in extraNav"> <a :href="nav.href">{{ nav.desc }}</a></li>
-  </ul>
-    <div class="btn-group pull-right">
-    <transition-group tag="ul" name="nav__item" class="nav nav-tabs">
-      <button v-for="label in labels" class="btn btn-default" :key="label" @click="navBack">
-       <a @click="navBack"> <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
-         {{ label }}</a>
-      </button>
-    </transition-group>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <ul class="nav nav-tabs">
+        <li v-for="nav in extraNav"> <a :href="nav.href">{{ nav.desc }}</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-12">
+      <transition-group tag="div" name="nav" class="pull-right">
+        <span v-for="label in labels" class="nav__item" :key="label" @click="navBack">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          <span class="nav__item--label">{{ label }}</span>
+        </span>
+      </transition-group>
+    </div>
   </div>
-  </div>
+
 </template>
 
 <script>
-export default {
-  name: 'blog-nav',
-  props: {
-    navs: Number,
-    content: Object,
-    filters: {
-      type: Object,
-      default: () => {}
-    }
-  },
-
-  computed: {
-    labels() {
-      return Object.keys(this.filters)
-        .map(filter => this.content.labels[filter])
+  export default {
+    name: 'blog-nav',
+    props: {
+      navs: Number,
+      content: Object,
+      filters: {
+        type: Object,
+        default: () => {}
+      }
     },
-    extraNav() {
-      return window.vueextranav;
-    }
-  },
 
-  methods: {
-    navBack() {
-      if (this.navs && !this.filters.author) this.$router.go(-1)
-      else this.$router.push('/')
+    computed: {
+      labels() {
+        return Object.keys(this.filters)
+          .map(filter => this.content.labels[filter])
+      },
+      extraNav() {
+        return window.vueextranav;
+      }
+    },
+
+    methods: {
+      navBack() {
+        if (this.navs && !this.filters.author) this.$router.go(-1)
+        else this.$router.push('/')
+      }
     }
   }
-}
 </script>
+

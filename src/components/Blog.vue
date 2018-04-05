@@ -1,10 +1,10 @@
 <template>
-  <main class="blog" :class="{ 'blog--reading': this.post }">
+  <div  class="col-sm-12">
     <blog-nav :content="content" :filters="filters" :navs="navs"/>
     <blog-feed :filters="filters"/>
     <blog-post :post="post"/>
     <!--<blog-footer/>-->
-  </main>
+  </div>
 </template>
 
 <script>
