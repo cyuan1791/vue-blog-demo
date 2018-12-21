@@ -1,6 +1,6 @@
 <template>
   <transition name="post">
-    <div v-if="post" class="col-sm-8">
+    <div v-if="post" class="col-sm-8" style="padding: 10px;">
       <header class="post__header">
         <h3 class="post__title">{{ title }}</h3>
 
